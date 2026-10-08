@@ -1,184 +1,476 @@
-.counter {
+/* Cores e estilos globais */
+
+:root {
+  --azul-campanha: #3d74b6;
+  --azul-escuro: #2c5f9c;
+  --amarelo: #ffd166;
+  --amarelo-forte: #ffb511;
+  --bege: #fbf6df;
+  --papel: #fdfcf7;
+  --texto: #243b57;
+  --texto-secundario: #536477;
+  --borda: #dcd8c8;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--texto);
+  background: var(--papel);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--azul-escuro);
+  outline-offset: 4px;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+/* Estrutura da página */
+
+.gerador {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.marca {
+  color: var(--azul-escuro);
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.marca span {
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.selo {
+  padding: 8px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 100px;
+  color: var(--azul-escuro);
+  background: var(--bege);
+  font-size: 12px;
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 80px;
+  padding: 56px 0;
+}
+
+/* Painel de edição */
+
+.painel {
+  min-width: 0;
+  padding-top: 24px;
+}
+
+.sobretitulo {
+  margin-bottom: 16px;
+  color: var(--azul-escuro);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.painel h1 {
+  max-width: 440px;
+  color: var(--azul-escuro);
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.introducao {
+  max-width: 400px;
+  margin-top: 20px;
+  color: var(--texto-secundario);
   font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  line-height: 1.65;
 }
 
-.hero {
-  position: relative;
+/* Escolha do fundo */
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+.opcoes {
+  min-width: 0;
+  margin: 32px 0 0;
+  padding: 0;
+  border: 0;
 }
 
-#center {
+.opcoes legend,
+.etapa h2 {
+  padding: 0;
+  color: var(--azul-escuro);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.temas {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.opcao-tema {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 12px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  color: var(--azul-escuro);
+  background: var(--papel);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.opcao-tema:hover {
+  background: var(--bege);
+}
+
+.opcao-tema[aria-pressed="true"] {
+  border-color: var(--azul-campanha);
+  background: var(--bege);
+  box-shadow: inset 0 0 0 1px var(--azul-campanha);
+}
+
+.amostra {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgb(0 0 0 / 12%);
+  border-radius: 50%;
+}
+
+.amostra-azul {
+  background: var(--azul-campanha);
+}
+
+.amostra-clara {
+  background: var(--bege);
+}
+
+/* Foto e ações */
+
+.etapa {
+  margin: 28px 0;
+}
+
+.etapa p {
+  margin-top: 10px;
+  color: var(--texto-secundario);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.botao {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 20px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-weight: 700;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.botao-secundario {
+  margin-top: 14px;
+  border-color: var(--azul-campanha);
+  color: var(--azul-escuro);
+  background: var(--papel);
+}
+
+.botao-secundario:not(:disabled):hover {
+  background: var(--bege);
+}
+
+.botao-primario {
+  color: var(--texto);
+  background: var(--amarelo);
+}
+
+.botao-primario:not(:disabled):hover {
+  background: var(--amarelo-forte);
+}
+
+.botao:disabled {
+  opacity: 0.5;
+}
+
+.nota {
+  margin-top: 16px;
+  color: var(--texto-secundario);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Área de prévia */
+
+.area-previa {
+  min-width: 0;
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+}
+
+.previa-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.previa-cabecalho h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.previa-cabecalho span {
+  color: var(--texto-secundario);
+  font-size: 12px;
+}
+
+/* Composição do card */
+
+.card {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 8%;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 18px 45px rgb(36 59 87 / 12%);
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.card--azul {
+  color: var(--bege);
+  background-color: var(--azul-campanha);
+}
+
+.card--claro {
+  color: var(--azul-escuro);
+  background-color: var(--bege);
+}
+
+.card-titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-titulo span {
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.card-titulo strong {
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: -0.04em;
+}
+
+.foto-placeholder {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 76%;
+  aspect-ratio: 1;
+  border: 2px dashed currentColor;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 10%);
+  font-size: 14px;
+}
+
+.card-frase {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.previa-nota {
+  margin-top: 16px;
+  color: var(--texto-secundario);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Celular e tablet */
+
+@media (max-width: 800px) {
+  .gerador {
+    padding: 24px 20px;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  .editor {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 32px;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .painel {
+    padding-top: 0;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opcao-tema,
+  .botao {
+    transition: none;
+  }
+}
+
+.logo {
+  width: 100%;
+  max-width: 250px;
+}
+
+.card-titulo,
+.card-frase {
+  font-family: "Libre Baskerville", Georgia, serif;
+}
+
+.card-titulo strong {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.card-frase {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+/* Tipografia editorial */
+
+.painel h1,
+.introducao,
+.card-titulo,
+.card-frase {
+  font-family: "Libre Baskerville", Georgia, serif;
+}
+
+.painel h1 {
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.introducao {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: normal;
+}
+
+/* Logo do cabeçalho */
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+}
+
+.foto-placeholder {
+  position: relative;
+  overflow: hidden;
+}
+
+.foto-placeholder.tem-foto {
+  border: 0;
+}
+
+.foto-usuario {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.etapa .erro-foto {
+  color: #a12b28;
+  font-size: 13px;
+  line-height: 1.5;
 }

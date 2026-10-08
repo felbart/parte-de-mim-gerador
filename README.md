@@ -1,75 +1,108 @@
-# React + TypeScript + Vite
+# UFT Parte de Mim — Gerador de Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Protótipo de uma ferramenta para personalizar cards da campanha
+**UFT Parte de Mim**, escolhendo um fundo e adicionando uma foto.
 
-Currently, two official plugins are available:
+Projeto desenvolvido para aprendizado com React, TypeScript e Vite.
+Não constitui uma página oficial ou um serviço institucional da UFT.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funcionalidades
 
-## React Compiler
+Implementadas:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Escolha entre fundo azul e claro.
+- Seleção de fotos em JPG, PNG ou WebP, de até 20 MB.
+- Prévia da foto com recorte circular.
+- Troca da foto mantendo o tema selecionado.
+- Layout responsivo.
+- Composição vertical na proporção 3:4.
 
-## Expanding the ESLint configuration
+Em desenvolvimento:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Ajustes de posição e zoom da foto.
+- Aplicação da moldura final da campanha.
+- Download do card em PNG, com 1080 × 1440 pixels.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+O botão de download permanece desabilitado nesta etapa.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Tecnologias
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- React
+- TypeScript
+- Vite
+- CSS
+- Libre Baskerville, carregada pelo Google Fonts
 
-```
+## Executar localmente
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Com Node.js e npm instalados, execute na pasta do projeto:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    npm install
+    npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Abra no navegador o endereço informado pelo Vite.
 
-```
+Para gerar a versão de produção:
+
+    npm run build
+
+Para visualizar essa versão localmente:
+
+    npm run preview
+
+## Organização
+
+| Arquivo ou pasta | Responsabilidade |
+|---|---|
+| `src/App.tsx` | Interface, escolha do tema e seleção da foto |
+| `src/App.css` | Estilos globais, paleta e layout responsivo |
+| `src/assets/` | Logo, texturas e demais elementos visuais |
+| `src/main.tsx` | Inicialização da aplicação |
+| `index.html` | Documento HTML e carregamento da fonte |
+
+## Identidade visual
+
+As cores estão centralizadas em variáveis no `App.css`:
+
+| Variável | Cor | Uso |
+|---|---|---|
+| `--azul-campanha` | `#3D74B6` | Fundo azul e controles |
+| `--azul-escuro` | `#2C5F9C` | Títulos e detalhes |
+| `--amarelo` | `#FFD166` | Botão principal |
+| `--amarelo-forte` | `#FFB511` | Estado hover do botão principal |
+| `--bege` | `#FBF6DF` | Fundo claro e superfícies |
+| `--papel` | `#FDFCF7` | Fundo da página |
+
+Libre Baskerville é usada nos títulos e textos editoriais.
+Arial é usada nos controles e instruções.
+
+As cores incorporadas aos arquivos SVG devem ser alteradas
+nos próprios arquivos.
+
+## Fotos e privacidade
+
+A foto selecionada é acessada localmente pelo navegador por meio
+de uma URL temporária, criada com `URL.createObjectURL`.
+
+A aplicação não envia a foto para um servidor e não implementa
+armazenamento persistente. Ao recarregar ou fechar a página,
+a seleção é perdida.
+
+O carregamento da fonte utiliza uma conexão com o Google Fonts.
+Isso não envolve o envio da foto.
+
+## Limitações atuais
+
+- A composição e o recorte circular são provisórios.
+- O fundo original da foto é preservado; não há remoção de fundo.
+- Ainda não é possível ajustar o enquadramento ou exportar o card.
+- A prévia usa a proporção da arte final, mas é exibida em tamanho
+  adaptado à tela.
+
+## Autoria
+
+Desenvolvido por Felipe Leite como projeto de aprendizado.
+
+A identidade visual da campanha e as marcas institucionais
+não representam autorização para publicação ou uso oficial
+deste protótipo.
